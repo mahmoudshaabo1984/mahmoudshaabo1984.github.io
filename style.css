@@ -745,10 +745,11 @@ html.theme-light #theme-toggle .icon-sun  { display: none; }
     letter-spacing: 0.4px;
 }
 
-.py-tag   { background-color: rgba(55, 115, 165, 0.22); color: #5294c9; }
-.js-tag   { background-color: rgba(247, 223, 30, 0.22); color: #e2c000; }
-.html-tag { background-color: rgba(227, 76, 38, 0.22);  color: #e34c26; }
-.cs-tag   { background-color: rgba(23, 134, 0, 0.22);   color: #4caf3a; }
+.py-tag    { background-color: rgba(55, 115, 165, 0.22); color: #5294c9; }
+.js-tag    { background-color: rgba(247, 223, 30, 0.22); color: #e2c000; }
+.html-tag  { background-color: rgba(227, 76, 38, 0.22);  color: #e34c26; }
+.cs-tag    { background-color: rgba(23, 134, 0, 0.22);   color: #4caf3a; }
+.linux-tag { background-color: rgba(255, 204, 0, 0.18);  color: #b8a000; }
 
 .project-header h3 {
     font-size: 1.22rem;
