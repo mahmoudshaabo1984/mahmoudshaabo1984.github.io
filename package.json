@@ -1,0 +1,13 @@
+{
+    "name": "mahmoudshaabo-portfolio",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Personal portfolio of Mahmoud Shaabo — Software Engineer Trainee.",
+    "type": "module",
+    "scripts": {
+        "build:assets": "node build-assets.mjs"
+    },
+    "devDependencies": {
+        "sharp": "^0.33.5"
+    }
+}

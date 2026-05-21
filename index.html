@@ -3,231 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmoud Shaabo | Personal Portfolio & Project Showcase</title>
-    <meta name="description" content="Personal portfolio of Mahmoud Shaabo - Web & Python Developer Trainee. Explore my projects and get in touch.">
-    <!-- Google Fonts for modern typography -->
+
+    <!-- Primary SEO -->
+    <title>Mahmoud Shaabo | Software Engineer Trainee &amp; Accessibility Advocate</title>
+    <meta name="description" content="Personal portfolio of Mahmoud Shaabo &mdash; a Python &amp; JavaScript developer trainee at CodeYourFuture, building accessible web applications with a strong focus on inclusive design and screen-reader support.">
+    <meta name="author" content="Mahmoud Shaabo">
+    <meta name="keywords" content="Mahmoud Shaabo, portfolio, software engineer, web developer, Python developer, JavaScript developer, accessibility, NVDA, WCAG, CodeYourFuture, Sheffield, blind developer">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="dark light">
+    <link rel="canonical" href="https://mahmoudshaabo-portfolio.netlify.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mahmoud Shaabo Portfolio">
+    <meta property="og:title" content="Mahmoud Shaabo | Software Engineer Trainee &amp; Accessibility Advocate">
+    <meta property="og:description" content="Python &amp; JavaScript developer trainee at CodeYourFuture. Building accessible web applications with a first-hand understanding of screen-reader-driven workflows.">
+    <meta property="og:url" content="https://mahmoudshaabo-portfolio.netlify.app/">
+    <meta property="og:image" content="https://mahmoudshaabo-portfolio.netlify.app/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Mahmoud Shaabo &mdash; Software Engineer Trainee, accessibility advocate.">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:locale:alternate" content="ar_AR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mahmoud Shaabo | Software Engineer Trainee &amp; Accessibility Advocate">
+    <meta name="twitter:description" content="Python &amp; JavaScript developer trainee at CodeYourFuture. Building accessible web applications.">
+    <meta name="twitter:image" content="https://mahmoudshaabo-portfolio.netlify.app/og-image.png">
+    <meta name="twitter:image:alt" content="Mahmoud Shaabo &mdash; Software Engineer Trainee, accessibility advocate.">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Preconnect & preload critical assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="profile.jpg" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- CSS stylesheet -->
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <!-- JavaScript file -->
+
+    <!-- Theme bootstrap: runs synchronously to prevent FOUC -->
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                var theme = stored || (prefersLight ? 'light' : 'dark');
+                document.documentElement.setAttribute('data-theme', theme);
+                var storedLang = localStorage.getItem('lang');
+                if (storedLang === 'ar') {
+                    document.documentElement.setAttribute('lang', 'ar');
+                    document.documentElement.setAttribute('dir', 'rtl');
+                }
+            } catch (e) { /* ignore storage errors */ }
+        })();
+    </script>
+
+    <!-- JSON-LD structured data (Person) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mahmoud Shaabo",
+        "url": "https://mahmoudshaabo-portfolio.netlify.app/",
+        "image": "https://mahmoudshaabo-portfolio.netlify.app/profile.jpg",
+        "jobTitle": "Software Engineer Trainee",
+        "description": "Aspiring software engineer focused on accessible web development, Python, and JavaScript.",
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Aleppo"
+        },
+        "knowsAbout": ["Python", "JavaScript", "C#", "Web Accessibility", "WCAG", "HTML", "CSS", "Git"],
+        "knowsLanguage": ["English", "Arabic"],
+        "sameAs": [
+            "https://github.com/mahmoudshaabo1984"
+        ]
+    }
+    </script>
+
+    <!-- Main script -->
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id="top">
 
-    <!-- Skip link for keyboard/screen reader navigation -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Skip link for keyboard / screen-reader navigation -->
+    <a href="#main-content" class="skip-link" data-i18n="skip">Skip to main content</a>
 
-    <!-- Accessibility live region for NVDA announcements -->
+    <!-- ARIA live region for screen-reader announcements -->
     <div id="a11y-alert-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Header and Navigation -->
+    <!-- Header & primary navigation -->
     <header class="main-header">
         <div class="container header-container">
             <div class="logo">
-                <a href="#" aria-label="Mahmoud Shaabo Homepage">Mahmoud Shaabo</a>
+                <a href="#top" aria-label="Mahmoud Shaabo &mdash; back to top">Mahmoud Shaabo</a>
             </div>
-            <nav class="main-nav" aria-label="Main Navigation">
+
+            <nav class="main-nav" id="primary-nav" aria-label="Main Navigation">
                 <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </nav>
+
+            <div class="header-actions">
+                <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch language to Arabic" title="Switch language">
+                    <span aria-hidden="true" id="lang-toggle-label">AR</span>
+                </button>
+                <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme">
+                    <svg class="icon icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                    <svg class="icon icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button type="button" id="menu-toggle" class="icon-btn menu-toggle" aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+                    <span class="menu-bars" aria-hidden="true"></span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main content -->
     <main id="main-content">
-        
-        <!-- Hero Section -->
+
+        <!-- Hero -->
         <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-glow" aria-hidden="true"></div>
             <div class="container hero-container">
                 <div class="hero-image-wrapper">
-                    <!-- Profile Picture -->
-                    <img src="profile.jpg" alt="Profile photo of Mahmoud Shaabo" class="hero-profile-img">
+                    <img src="profile.jpg" alt="Portrait photo of Mahmoud Shaabo wearing an orange shirt." class="hero-profile-img" width="320" height="320" fetchpriority="high">
                 </div>
                 <div class="hero-text-content">
-                    <span class="badge">Welcome to my portfolio</span>
-                    <h1 id="hero-title"><span id="dynamic-greeting"></span>I am Mahmoud Shaabo</h1>
-                    <p class="hero-subtitle">Aspiring Software Engineer | Focus on Logic & Web Development</p>
-                    <p class="hero-desc">
-                        A trainee at <strong>CodeYourFuture (CYF)</strong> and a passionate Python & JavaScript developer. I focus on building smart, accessible, and clean software solutions for everyone.
+                    <span class="badge" data-i18n="hero.badge">Welcome to my portfolio</span>
+                    <h1 id="hero-title">
+                        <span id="dynamic-greeting" data-i18n-greeting>Hello, </span><span data-i18n="hero.title">I am Mahmoud Shaabo</span>
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">Aspiring Software Engineer | Focus on Logic &amp; Web Development</p>
+                    <p class="hero-desc" data-i18n="hero.desc">
+                        A trainee at <strong>CodeYourFuture (CYF)</strong> and a passionate Python &amp; JavaScript developer. I focus on building smart, accessible, and clean software solutions for everyone.
                     </p>
                     <div class="hero-cta-group">
-                        <a href="#projects" class="btn btn-primary">Browse My Projects</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-primary" data-i18n="hero.cta.projects">Browse My Projects</a>
+                        <a href="#contact" class="btn btn-secondary" data-i18n="hero.cta.contact">Get In Touch</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Me Section -->
+        <!-- About -->
         <section id="about" class="about-section" aria-labelledby="about-title">
             <div class="container">
-                <h2 id="about-title" class="section-title">About Me</h2>
+                <h2 id="about-title" class="section-title reveal" data-i18n="about.title">About Me</h2>
                 <div class="about-grid">
-                    <div class="about-card">
-                        <h3>Background & Education</h3>
-                        <p>I hold a BA in English Literature from the University of Aleppo (2011). I am currently based in the Sheffield/Doncaster region, UK. I enjoy merging my passion for languages, translation, and structured logic with writing clean code.</p>
+                    <div class="about-card reveal">
+                        <h3 data-i18n="about.background.title">Background &amp; Education</h3>
+                        <p data-i18n="about.background.body">I hold a BA in English Literature from the University of Aleppo (2011). I am currently based in the Sheffield/Doncaster region, UK. I enjoy merging my passion for languages, translation, and structured logic with writing clean code.</p>
                     </div>
-                    <div class="about-card">
-                        <h3>Vision & Career Goals</h3>
-                        <p>Being visually impaired, I have a first-hand understanding of the importance of web accessibility. My goal is to become a software engineer with a strong focus on backend systems, creating web applications that are inclusive and usable by everyone.</p>
+                    <div class="about-card reveal">
+                        <h3 data-i18n="about.vision.title">Vision &amp; Career Goals</h3>
+                        <p data-i18n="about.vision.body">Being visually impaired, I have a first-hand understanding of the importance of web accessibility. My goal is to become a software engineer with a strong focus on backend systems, creating web applications that are inclusive and usable by everyone.</p>
                     </div>
-                    <div class="about-card">
-                        <h3>Development Environment</h3>
-                        <p>I primary work on Windows 11 with WSL2 (running Ubuntu 24.04). I rely on the <strong>NVDA</strong> screen reader as my primary tool for development, reading, and testing websites.</p>
+                    <div class="about-card reveal">
+                        <h3 data-i18n="about.env.title">Development Environment</h3>
+                        <p data-i18n="about.env.body">I primarily work on Windows 11 with WSL2 (running Ubuntu 24.04). I rely on the <strong>NVDA</strong> screen reader as my primary tool for development, reading, and testing websites.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- Skills -->
         <section id="skills" class="skills-section" aria-labelledby="skills-title">
             <div class="container">
-                <h2 id="skills-title" class="section-title">Technical Skills</h2>
+                <h2 id="skills-title" class="section-title reveal" data-i18n="skills.title">Technical Skills</h2>
                 <div class="skills-grid">
-                    <!-- Python -->
-                    <div class="skill-card" aria-label="Python programming language skill">
-                        <div class="skill-icon py-icon">Py</div>
+                    <div class="skill-card reveal">
+                        <div class="skill-icon py-icon" aria-hidden="true">Py</div>
                         <h3>Python</h3>
-                        <p>Advanced-beginner level (2.5+ years self-study, object-oriented programming (OOP), GUI applications with wxPython, and basic cryptography).</p>
+                        <p data-i18n="skills.py">Advanced-beginner level (2.5+ years self-study, object-oriented programming, GUI applications with wxPython, and basic cryptography).</p>
                     </div>
-                    <!-- JavaScript -->
-                    <div class="skill-card" aria-label="JavaScript skill">
-                        <div class="skill-icon js-icon">JS</div>
+                    <div class="skill-card reveal">
+                        <div class="skill-icon js-icon" aria-hidden="true">JS</div>
                         <h3>JavaScript</h3>
-                        <p>Intermediate level (DOM manipulation, ES Modules, and automated testing with Jest).</p>
+                        <p data-i18n="skills.js">Intermediate level (DOM manipulation, ES Modules, and automated testing with Jest).</p>
                     </div>
-                    <!-- C# -->
-                    <div class="skill-card" aria-label="C# and .NET skill">
-                        <div class="skill-icon cs-icon">C#</div>
+                    <div class="skill-card reveal">
+                        <div class="skill-icon cs-icon" aria-hidden="true">C#</div>
                         <h3>C# / .NET</h3>
-                        <p>Exploring and building basic Console and .NET applications to broaden backend skills.</p>
+                        <p data-i18n="skills.cs">Exploring and building basic Console and .NET applications to broaden backend skills.</p>
                     </div>
-                    <!-- Web / Accessibility -->
-                    <div class="skill-card" aria-label="HTML5, CSS3, and Web Accessibility skill">
-                        <div class="skill-icon a11y-icon">HTML</div>
-                        <h3>HTML5 & CSS3</h3>
-                        <p>Designing modern, responsive layouts built on standard accessibility (WCAG) guidelines.</p>
+                    <div class="skill-card reveal">
+                        <div class="skill-icon a11y-icon" aria-hidden="true">HTML</div>
+                        <h3>HTML5 &amp; CSS3</h3>
+                        <p data-i18n="skills.web">Designing modern, responsive layouts built on WCAG accessibility guidelines.</p>
                     </div>
-                    <!-- Tools -->
-                    <div class="skill-card" aria-label="Git and Command Line tools skill">
-                        <div class="skill-icon git-icon">Git</div>
-                        <h3>Git & CLI</h3>
-                        <p>Comfortable with Bash/WSL terminal environments and using Git version control for code repositories.</p>
+                    <div class="skill-card reveal">
+                        <div class="skill-icon git-icon" aria-hidden="true">Git</div>
+                        <h3>Git &amp; CLI</h3>
+                        <p data-i18n="skills.git">Comfortable with Bash/WSL terminal environments and using Git version control for code repositories.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- Projects -->
         <section id="projects" class="projects-section" aria-labelledby="projects-title">
             <div class="container">
-                <h2 id="projects-title" class="section-title">Projects & Courses</h2>
-                <p class="section-desc">Here is a selection of the repositories and projects I have worked on:</p>
-                
+                <h2 id="projects-title" class="section-title reveal" data-i18n="projects.title">Projects &amp; Courses</h2>
+                <p class="section-desc reveal" data-i18n="projects.desc">Here is a selection of the repositories and projects I have worked on. Use the filters to narrow by language.</p>
+
+                <div class="project-filter reveal" role="group" aria-label="Filter projects by technology">
+                    <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true" data-i18n="filter.all">All</button>
+                    <button type="button" class="filter-chip" data-filter="python" aria-pressed="false">Python</button>
+                    <button type="button" class="filter-chip" data-filter="javascript" aria-pressed="false">JavaScript</button>
+                    <button type="button" class="filter-chip" data-filter="html" aria-pressed="false">HTML / CSS</button>
+                    <button type="button" class="filter-chip" data-filter="csharp" aria-pressed="false">C#</button>
+                </div>
+                <p id="filter-count" class="filter-count sr-only" aria-live="polite"></p>
+
                 <div class="projects-grid">
-                    
-                    <!-- Project 1 -->
-                    <article class="project-card" aria-labelledby="proj-title-1">
+                    <article class="project-card reveal" data-tags="python" aria-labelledby="proj-title-1">
                         <div class="project-header">
                             <span class="project-lang py-tag">Python</span>
-                            <h3 id="proj-title-1">Python Course for the Blind</h3>
+                            <h3 id="proj-title-1" data-i18n="proj.1.title">Python Course for the Blind</h3>
                         </div>
                         <div class="project-body">
-                            <p>Exercises and practical scripts created during the Python course for visually impaired students led by trainer Ahmed Baker.</p>
-                            <a href="https://github.com/mahmoudshaabo1984/ahmed-baker-python-course-for-blind" class="project-link" aria-label="Python Course for the Blind repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.1.desc">Exercises and practical scripts created during the Python course for visually impaired students led by trainer Ahmed Baker.</p>
+                            <a href="https://github.com/mahmoudshaabo1984/ahmed-baker-python-course-for-blind" class="project-link" aria-label="Open the Python Course for the Blind repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
 
-                    <!-- Project 2 -->
-                    <article class="project-card" aria-labelledby="proj-title-2">
+                    <article class="project-card reveal" data-tags="html" aria-labelledby="proj-title-2">
                         <div class="project-header">
                             <span class="project-lang html-tag">HTML</span>
-                            <h3 id="proj-title-2">Linux Course for the Blind</h3>
+                            <h3 id="proj-title-2" data-i18n="proj.2.title">Linux Course for the Blind</h3>
                         </div>
                         <div class="project-body">
-                            <p>CommandLine tools, scripting basics, and server environment setups from Ahmed Baker's Linux course.</p>
-                            <a href="https://github.com/mahmoudshaabo1984/ahmed-baker-linux-course" class="project-link" aria-label="Linux Course for the Blind repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.2.desc">Command-line tools, scripting basics, and server environment setups from Ahmed Baker's Linux course.</p>
+                            <a href="https://github.com/mahmoudshaabo1984/ahmed-baker-linux-course" class="project-link" aria-label="Open the Linux Course for the Blind repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
 
-                    <!-- Project 3 -->
-                    <article class="project-card" aria-labelledby="proj-title-3">
+                    <article class="project-card reveal" data-tags="python" aria-labelledby="proj-title-3">
                         <div class="project-header">
                             <span class="project-lang py-tag">Python</span>
-                            <h3 id="proj-title-3">Python Course - Ahmed Sami</h3>
+                            <h3 id="proj-title-3" data-i18n="proj.3.title">Python Course &mdash; Ahmed Sami</h3>
                         </div>
                         <div class="project-body">
-                            <p>Refactored code and custom implementations based on the Python programming syllabus from tutor Ahmed Sami.</p>
-                            <a href="https://github.com/mahmoudshaabo1984/ahmed-sami-python-course-modified" class="project-link" aria-label="Modified Python Course repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.3.desc">Refactored code and custom implementations based on the Python programming syllabus from tutor Ahmed Sami.</p>
+                            <a href="https://github.com/mahmoudshaabo1984/ahmed-sami-python-course-modified" class="project-link" aria-label="Open the Modified Python Course repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
 
-                    <!-- Project 4 -->
-                    <article class="project-card" aria-labelledby="proj-title-4">
+                    <article class="project-card reveal" data-tags="html" aria-labelledby="proj-title-4">
                         <div class="project-header">
                             <span class="project-lang html-tag">HTML / CSS</span>
-                            <h3 id="proj-title-4">Web Course - Ahmed Sami</h3>
+                            <h3 id="proj-title-4" data-i18n="proj.4.title">Web Course &mdash; Ahmed Sami</h3>
                         </div>
                         <div class="project-body">
-                            <p>Design assignments, CSS properties templates, and page mockups for Ahmed Sami's web development class.</p>
-                            <a href="https://github.com/mahmoudshaabo1984/ahmed-sami-web-course" class="project-link" aria-label="Ahmed Sami Web Course repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.4.desc">Design assignments, CSS property templates, and page mock-ups for Ahmed Sami's web development class.</p>
+                            <a href="https://github.com/mahmoudshaabo1984/ahmed-sami-web-course" class="project-link" aria-label="Open the Ahmed Sami Web Course repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
 
-                    <!-- Project 5 -->
-                    <article class="project-card" aria-labelledby="proj-title-5">
+                    <article class="project-card reveal" data-tags="javascript" aria-labelledby="proj-title-5">
                         <div class="project-header">
                             <span class="project-lang js-tag">JavaScript</span>
-                            <h3 id="proj-title-5">CYF Workshops</h3>
+                            <h3 id="proj-title-5" data-i18n="proj.5.title">CYF Workshops</h3>
                         </div>
                         <div class="project-body">
-                            <p>A repository containing my work, assignments, and class exercises from the CodeYourFuture training cohort (Sheffield 2026).</p>
-                            <a href="https://github.com/mahmoudshaabo1984/CYF-Workshops" class="project-link" aria-label="CodeYourFuture Workshops repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.5.desc">A repository containing my work, assignments, and class exercises from the CodeYourFuture training cohort (Sheffield 2026).</p>
+                            <a href="https://github.com/mahmoudshaabo1984/CYF-Workshops" class="project-link" aria-label="Open the CodeYourFuture Workshops repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
 
-                    <!-- Project 6 -->
-                    <article class="project-card" aria-labelledby="proj-title-6">
+                    <article class="project-card reveal" data-tags="csharp" aria-labelledby="proj-title-6">
                         <div class="project-header">
                             <span class="project-lang cs-tag">C#</span>
-                            <h3 id="proj-title-6">C# Console Example Project</h3>
+                            <h3 id="proj-title-6" data-i18n="proj.6.title">C# Console Example Project</h3>
                         </div>
                         <div class="project-body">
-                            <p>A testing ground for C# features, console applications, and learning object-oriented paradigms in .NET.</p>
-                            <a href="https://github.com/mahmoudshaabo1984/examble-project-c-" class="project-link" aria-label="C# Example project repository on GitHub" target="_blank" rel="noopener noreferrer">View Repository on GitHub ↗</a>
+                            <p data-i18n="proj.6.desc">A testing ground for C# features, console applications, and learning object-oriented paradigms in .NET.</p>
+                            <a href="https://github.com/mahmoudshaabo1984/examble-project-c-" class="project-link" aria-label="Open the C# Example project repository on GitHub (opens in a new tab)" target="_blank" rel="noopener noreferrer"><span data-i18n="proj.link">View Repository on GitHub</span> <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
-
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact -->
         <section id="contact" class="contact-section" aria-labelledby="contact-title">
             <div class="container">
-                <h2 id="contact-title" class="section-title">Get in Touch</h2>
-                <p class="section-desc">I am always open to discussing software projects, collaboration, or learning opportunities.</p>
-                
-                <div class="contact-cards">
-                    <!-- GitHub -->
-                    <div class="contact-item">
-                        <h3>GitHub</h3>
-                        <p>Follow my coding activity and contributions.</p>
-                        <a href="https://github.com/mahmoudshaabo1984" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
-                    </div>
-                    <!-- Email -->
-                    <div class="contact-item">
-                        <h3>Email</h3>
-                        <p>Reach out for inquiries or direct communication.</p>
-                        <a href="mailto:obscu@example.com" class="btn btn-secondary">Send Email ✉</a>
-                        <button id="copy-email-btn" class="btn btn-secondary" style="margin-top: 15px; width: 100%; display: block;">Copy Email Address 📋</button>
-                    </div>
+                <h2 id="contact-title" class="section-title reveal" data-i18n="contact.title">Get in Touch</h2>
+                <p class="section-desc reveal" data-i18n="contact.desc">I am always open to discussing software projects, collaboration, or learning opportunities. Send a message below or reach me on GitHub.</p>
+
+                <div class="contact-grid">
+                    <!-- Contact form -->
+                    <form
+                        class="contact-form reveal"
+                        name="contact"
+                        method="POST"
+                        data-netlify="true"
+                        data-netlify-honeypot="bot-field"
+                        aria-labelledby="contact-form-title"
+                        novalidate
+                    >
+                        <h3 id="contact-form-title" data-i18n="contact.form.title">Send a message</h3>
+
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="hp-field" aria-hidden="true">
+                            <label>Don&rsquo;t fill this out if you&rsquo;re human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+                        </p>
+
+                        <div class="form-row">
+                            <label for="cf-name" data-i18n="contact.form.name">Your name</label>
+                            <input type="text" id="cf-name" name="name" required autocomplete="name" aria-describedby="cf-name-err">
+                            <span class="form-error" id="cf-name-err" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="cf-email" data-i18n="contact.form.email">Your email</label>
+                            <input type="email" id="cf-email" name="email" required autocomplete="email" aria-describedby="cf-email-err">
+                            <span class="form-error" id="cf-email-err" role="alert"></span>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="cf-message" data-i18n="contact.form.message">Your message</label>
+                            <textarea id="cf-message" name="message" rows="5" required aria-describedby="cf-message-err"></textarea>
+                            <span class="form-error" id="cf-message-err" role="alert"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit">Send message</button>
+                        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                    </form>
+
+                    <!-- Side links -->
+                    <aside class="contact-aside reveal" aria-labelledby="contact-elsewhere-title">
+                        <h3 id="contact-elsewhere-title" data-i18n="contact.elsewhere.title">Elsewhere</h3>
+                        <ul class="contact-links">
+                            <li>
+                                <a href="https://github.com/mahmoudshaabo1984" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Mahmoud Shaabo's GitHub profile (opens in a new tab)">
+                                    <svg class="contact-link-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.97-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.47.11-3.06 0 0 .97-.31 3.17 1.18.92-.26 1.91-.39 2.89-.39.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.77.11 3.06.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12 24 5.65 18.85.5 12 .5z"/></svg>
+                                    <span>GitHub</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:contact@mahmoudshaabo-portfolio.netlify.app" class="contact-link" aria-label="Send an email via your mail client">
+                                    <svg class="contact-link-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 7L2 7"></path></svg>
+                                    <span data-i18n="contact.elsewhere.email">Mail client</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#projects" class="contact-link">
+                                    <svg class="contact-link-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                    <span data-i18n="contact.elsewhere.projects">Browse projects</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <p class="contact-note" data-i18n="contact.elsewhere.note">Replies usually within 48 hours.</p>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -237,10 +378,15 @@
     <!-- Footer -->
     <footer class="main-footer">
         <div class="container footer-container">
-            <p>&copy; 2026 Mahmoud Shaabo. All rights reserved.</p>
-            <p class="a11y-badge">This site has been built to conform with W3C WCAG accessibility standards and screen readers.</p>
+            <p data-i18n="footer.copy">&copy; 2026 Mahmoud Shaabo. All rights reserved.</p>
+            <p class="a11y-badge" data-i18n="footer.a11y">Built to conform with W3C WCAG accessibility standards and tested with screen readers.</p>
         </div>
     </footer>
+
+    <!-- Back to top -->
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" hidden>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
 
 </body>
 </html>

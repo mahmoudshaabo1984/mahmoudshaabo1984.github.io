@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#161b22"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="180" cy="180" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f08a24" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#f08a24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="1050" cy="520" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff9e42" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#ff9e42" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f08a24"/>
+      <stop offset="1" stop-color="#ff9e42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Border -->
+  <rect x="20" y="20" width="1160" height="590" rx="22" fill="none" stroke="#30363d" stroke-width="2"/>
+
+  <!-- Brand mark -->
+  <g transform="translate(80,80)">
+    <rect width="68" height="68" rx="14" fill="#21262d" stroke="url(#accent)" stroke-width="2"/>
+    <text x="34" y="48" text-anchor="middle"
+          font-family="'Outfit','Segoe UI',sans-serif"
+          font-weight="800" font-size="34" fill="url(#accent)">MS</text>
+  </g>
+  <text x="170" y="128"
+        font-family="'Outfit','Segoe UI',sans-serif"
+        font-weight="700" font-size="22" fill="#8b949e">
+    mahmoudshaabo-portfolio.netlify.app
+  </text>
+
+  <!-- Headline -->
+  <text x="80" y="290"
+        font-family="'Outfit','Segoe UI',sans-serif"
+        font-weight="800" font-size="78" fill="#f0f6fc">
+    Mahmoud Shaabo
+  </text>
+  <text x="80" y="360"
+        font-family="'Outfit','Segoe UI',sans-serif"
+        font-weight="600" font-size="40" fill="url(#accent)">
+    Software Engineer Trainee
+  </text>
+
+  <!-- Subtext -->
+  <text x="80" y="430"
+        font-family="'Outfit','Segoe UI',sans-serif"
+        font-weight="400" font-size="28" fill="#8b949e">
+    Python &#183; JavaScript &#183; Web Accessibility
+  </text>
+  <text x="80" y="470"
+        font-family="'Outfit','Segoe UI',sans-serif"
+        font-weight="400" font-size="24" fill="#8b949e">
+    Building inclusive, screen-reader-friendly web apps.
+  </text>
+
+  <!-- Tag chips -->
+  <g transform="translate(80,520)" font-family="'Outfit','Segoe UI',sans-serif" font-weight="700" font-size="20">
+    <g>
+      <rect width="120" height="44" rx="22" fill="#21262d" stroke="#30363d"/>
+      <text x="60" y="30" text-anchor="middle" fill="#5294c9">Python</text>
+    </g>
+    <g transform="translate(140,0)">
+      <rect width="150" height="44" rx="22" fill="#21262d" stroke="#30363d"/>
+      <text x="75" y="30" text-anchor="middle" fill="#e2c000">JavaScript</text>
+    </g>
+    <g transform="translate(310,0)">
+      <rect width="180" height="44" rx="22" fill="#21262d" stroke="#30363d"/>
+      <text x="90" y="30" text-anchor="middle" fill="#f0f6fc">Accessibility</text>
+    </g>
+    <g transform="translate(510,0)">
+      <rect width="120" height="44" rx="22" fill="#21262d" stroke="#30363d"/>
+      <text x="60" y="30" text-anchor="middle" fill="#4caf3a">C# / .NET</text>
+    </g>
+  </g>
+
+  <!-- Decorative dot grid -->
+  <g fill="#30363d" opacity="0.6">
+    <circle cx="1080" cy="120" r="3"/>
+    <circle cx="1110" cy="120" r="3"/>
+    <circle cx="1140" cy="120" r="3"/>
+    <circle cx="1080" cy="150" r="3"/>
+    <circle cx="1110" cy="150" r="3"/>
+    <circle cx="1140" cy="150" r="3"/>
+    <circle cx="1080" cy="180" r="3"/>
+    <circle cx="1110" cy="180" r="3"/>
+    <circle cx="1140" cy="180" r="3"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build / OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Netlify CLI local state (auto-generated, not source of truth)
+.netlify/
+
+# Local helper scripts (one-off Netlify config tweaks)
+rename.js
+data.json
+
+# Audit notes (not part of the site)
+Website_Audit_Prompt.txt

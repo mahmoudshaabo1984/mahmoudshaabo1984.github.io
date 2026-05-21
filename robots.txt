@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mahmoudshaabo-portfolio.netlify.app/sitemap.xml
+Sitemap: https://mahmoudshaabo1984.github.io/sitemap.xml
