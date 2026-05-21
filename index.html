@@ -11,11 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <!-- CSS stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- JavaScript file -->
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <!-- Skip link for keyboard/screen reader navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Accessibility live region for NVDA announcements -->
+    <div id="a11y-alert-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Header and Navigation -->
     <header class="main-header">
@@ -46,7 +51,7 @@
                 </div>
                 <div class="hero-text-content">
                     <span class="badge">Welcome to my portfolio</span>
-                    <h1 id="hero-title">I am Mahmoud Shaabo</h1>
+                    <h1 id="hero-title"><span id="dynamic-greeting"></span>I am Mahmoud Shaabo</h1>
                     <p class="hero-subtitle">Aspiring Software Engineer | Focus on Logic & Web Development</p>
                     <p class="hero-desc">
                         A trainee at <strong>CodeYourFuture (CYF)</strong> and a passionate Python & JavaScript developer. I focus on building smart, accessible, and clean software solutions for everyone.
@@ -221,6 +226,7 @@
                         <h3>Email</h3>
                         <p>Reach out for inquiries or direct communication.</p>
                         <a href="mailto:obscu@example.com" class="btn btn-secondary">Send Email ✉</a>
+                        <button id="copy-email-btn" class="btn btn-secondary" style="margin-top: 15px; width: 100%; display: block;">Copy Email Address 📋</button>
                     </div>
                 </div>
             </div>
