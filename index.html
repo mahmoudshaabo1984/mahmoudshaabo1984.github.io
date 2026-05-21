@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,7 @@
     <meta name="author" content="Mahmoud Shaabo">
     <meta name="keywords" content="Mahmoud Shaabo, portfolio, software engineer, web developer, Python developer, JavaScript developer, accessibility, NVDA, WCAG, CodeYourFuture, Sheffield, blind developer">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+    <meta id="theme-color-meta" name="theme-color" content="#0d1117">
     <meta name="color-scheme" content="dark light">
     <link rel="canonical" href="https://mahmoudshaabo-portfolio.netlify.app/">
 
@@ -48,16 +47,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.1">
 
     <!-- Theme bootstrap: runs synchronously to prevent FOUC -->
     <script>
         (function () {
+            function normalizeTheme(value) {
+                return value === 'light' ? 'light' : 'dark';
+            }
+            function applyTheme(theme) {
+                theme = normalizeTheme(theme);
+                var html = document.documentElement;
+                html.setAttribute('data-theme', theme);
+                html.classList.toggle('theme-light', theme === 'light');
+                html.classList.toggle('theme-dark', theme === 'dark');
+                html.style.colorScheme = theme;
+                var meta = document.getElementById('theme-color-meta');
+                if (meta) meta.setAttribute('content', theme === 'light' ? '#f6f8fa' : '#0d1117');
+            }
             try {
                 var stored = localStorage.getItem('theme');
                 var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-                var theme = stored || (prefersLight ? 'light' : 'dark');
-                document.documentElement.setAttribute('data-theme', theme);
+                applyTheme(stored || (prefersLight ? 'light' : 'dark'));
                 var storedLang = localStorage.getItem('lang');
                 if (storedLang === 'ar') {
                     document.documentElement.setAttribute('lang', 'ar');
@@ -90,7 +101,7 @@
     </script>
 
     <!-- Main script -->
-    <script src="script.js" defer></script>
+    <script src="script.js?v=2.1" defer></script>
 </head>
 <body id="top">
 
@@ -100,14 +111,19 @@
     <!-- ARIA live region for screen-reader announcements -->
     <div id="a11y-alert-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
+    <!-- Shown when Windows High Contrast / forced-colors overrides site palette -->
+    <p class="forced-colors-notice" data-i18n="notice.forcedColors" role="status">
+        High contrast mode is active. System colors may override the site theme, but the theme setting is still saved.
+    </p>
+
     <!-- Header & primary navigation -->
     <header class="main-header">
         <div class="container header-container">
             <div class="logo">
-                <a href="#top" aria-label="Mahmoud Shaabo &mdash; back to top">Mahmoud Shaabo</a>
+                <a href="#top" data-i18n-aria="aria.logo">Mahmoud Shaabo</a>
             </div>
 
-            <nav class="main-nav" id="primary-nav" aria-label="Main Navigation">
+            <nav class="main-nav" id="primary-nav" data-i18n-aria="aria.nav">
                 <ul>
                     <li><a href="#about" data-i18n="nav.about">About</a></li>
                     <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
@@ -120,11 +136,14 @@
                 <button type="button" id="lang-toggle" class="icon-btn" aria-label="Switch language to Arabic" title="Switch language">
                     <span aria-hidden="true" id="lang-toggle-label">AR</span>
                 </button>
-                <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme">
-                    <svg class="icon icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
-                    <svg class="icon icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <button type="button" id="theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Switch to light theme" aria-pressed="false" title="Switch theme">
+                    <span class="theme-toggle-icon" aria-hidden="true">
+                        <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                        <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </span>
+                    <span id="theme-toggle-text">Dark</span>
                 </button>
-                <button type="button" id="menu-toggle" class="icon-btn menu-toggle" aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false">
+                <button type="button" id="menu-toggle" class="icon-btn menu-toggle" data-i18n-aria="aria.menu.open" aria-controls="primary-nav" aria-expanded="false">
                     <span class="menu-bars" aria-hidden="true"></span>
                 </button>
             </div>
@@ -219,7 +238,7 @@
                 <h2 id="projects-title" class="section-title reveal" data-i18n="projects.title">Projects &amp; Courses</h2>
                 <p class="section-desc reveal" data-i18n="projects.desc">Here is a selection of the repositories and projects I have worked on. Use the filters to narrow by language.</p>
 
-                <div class="project-filter reveal" role="group" aria-label="Filter projects by technology">
+                <div class="project-filter reveal" role="group" data-i18n-aria="aria.filter">
                     <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true" data-i18n="filter.all">All</button>
                     <button type="button" class="filter-chip" data-filter="python" aria-pressed="false">Python</button>
                     <button type="button" class="filter-chip" data-filter="javascript" aria-pressed="false">JavaScript</button>
@@ -384,7 +403,7 @@
     </footer>
 
     <!-- Back to top -->
-    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" hidden>
+    <button type="button" id="back-to-top" class="back-to-top" data-i18n-aria="aria.backToTop" hidden>
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
 

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Page Not Found | Mahmoud Shaabo</title>
     <meta name="description" content="The page you were looking for could not be found. Return to the Mahmoud Shaabo portfolio home.">
     <meta name="robots" content="noindex, follow">
-    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+    <meta id="theme-color-meta" name="theme-color" content="#0d1117">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -16,14 +15,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2.1">
 
     <script>
         (function () {
+            function normalizeTheme(value) {
+                return value === 'light' ? 'light' : 'dark';
+            }
+            function applyTheme(theme) {
+                theme = normalizeTheme(theme);
+                var html = document.documentElement;
+                html.setAttribute('data-theme', theme);
+                html.classList.toggle('theme-light', theme === 'light');
+                html.classList.toggle('theme-dark', theme === 'dark');
+                html.style.colorScheme = theme;
+                var meta = document.getElementById('theme-color-meta');
+                if (meta) meta.setAttribute('content', theme === 'light' ? '#f6f8fa' : '#0d1117');
+            }
             try {
                 var stored = localStorage.getItem('theme');
                 var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-                document.documentElement.setAttribute('data-theme', stored || (prefersLight ? 'light' : 'dark'));
+                applyTheme(stored || (prefersLight ? 'light' : 'dark'));
             } catch (e) { /* ignore */ }
         })();
     </script>

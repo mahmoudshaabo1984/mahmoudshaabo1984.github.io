@@ -90,10 +90,18 @@
             'footer.a11y': 'Built to conform with W3C WCAG accessibility standards and tested with screen readers.',
             'announce.theme.dark': 'Dark theme enabled.',
             'announce.theme.light': 'Light theme enabled.',
+            'announce.theme.forcedColors': 'High contrast mode is active — system colors may override site theme.',
             'announce.lang': 'Language switched to English.',
             'announce.menu.open': 'Navigation menu opened.',
             'announce.menu.close': 'Navigation menu closed.',
             'announce.filter': (n, lang) => `Showing ${n} project${n === 1 ? '' : 's'} matching ${lang}.`,
+            'theme.dark': 'Dark',
+            'theme.light': 'Light',
+            'notice.forcedColors': 'High contrast mode is active. System colors may override the site theme, but the theme setting is still saved.',
+            'aria.logo': 'Mahmoud Shaabo — back to top',
+            'aria.nav': 'Main Navigation',
+            'aria.filter': 'Filter projects by technology',
+            'aria.backToTop': 'Back to top',
             'aria.theme.toLight': 'Switch to light theme',
             'aria.theme.toDark': 'Switch to dark theme',
             'aria.lang.toAr': 'Switch language to Arabic',
@@ -167,10 +175,18 @@
             'footer.a11y': 'مبني وفق معايير الوصول W3C WCAG ومختبر مع قارئات الشاشة.',
             'announce.theme.dark': 'تم تفعيل الوضع الداكن.',
             'announce.theme.light': 'تم تفعيل الوضع الفاتح.',
+            'announce.theme.forcedColors': 'وضع التباين العالي مفعّل — قد تتجاوز ألوان النظام ألوان الموقع.',
             'announce.lang': 'تم تغيير اللغة إلى العربية.',
             'announce.menu.open': 'تم فتح قائمة التنقّل.',
             'announce.menu.close': 'تم إغلاق قائمة التنقّل.',
             'announce.filter': (n, lang) => `يُعرض ${n} مشروع${n === 1 ? '' : 'ًا'} مطابق للتصنيف ${lang}.`,
+            'theme.dark': 'داكن',
+            'theme.light': 'فاتح',
+            'notice.forcedColors': 'وضع التباين العالي مفعّل. قد تتجاوز ألوان النظام ألوان الموقع، لكن إعداد الوضع يُحفظ.',
+            'aria.logo': 'محمود شعبو — العودة إلى الأعلى',
+            'aria.nav': 'التنقل الرئيسي',
+            'aria.filter': 'تصفية المشاريع حسب التقنية',
+            'aria.backToTop': 'العودة إلى الأعلى',
             'aria.theme.toLight': 'التبديل إلى الوضع الفاتح',
             'aria.theme.toDark': 'التبديل إلى الوضع الداكن',
             'aria.lang.toAr': 'تغيير اللغة إلى العربية',
@@ -183,6 +199,52 @@
     function t(key) {
         const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
         return (i18n[lang] && i18n[lang][key]) || (i18n.en[key] || key);
+    }
+
+    function isForcedColorsActive() {
+        return window.matchMedia('(forced-colors: active)').matches;
+    }
+
+    function normalizeTheme(value) {
+        return value === 'light' ? 'light' : 'dark';
+    }
+
+    function applyTheme(theme) {
+        theme = normalizeTheme(theme);
+        const html = document.documentElement;
+        html.setAttribute('data-theme', theme);
+        html.classList.toggle('theme-light', theme === 'light');
+        html.classList.toggle('theme-dark', theme === 'dark');
+        html.style.colorScheme = theme;
+
+        const meta = document.getElementById('theme-color-meta');
+        if (meta) {
+            meta.setAttribute('content', theme === 'light' ? '#f6f8fa' : '#0d1117');
+        }
+
+        try { localStorage.setItem('theme', theme); } catch (e) { /* ignore */ }
+    }
+
+    function syncThemeButton() {
+        const btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+
+        const theme = normalizeTheme(document.documentElement.getAttribute('data-theme'));
+        const isLight = theme === 'light';
+
+        btn.setAttribute('aria-pressed', String(isLight));
+        btn.setAttribute('aria-label', t(isLight ? 'aria.theme.toDark' : 'aria.theme.toLight'));
+        btn.title = btn.getAttribute('aria-label');
+
+        const textEl = document.getElementById('theme-toggle-text');
+        if (textEl) textEl.textContent = t(isLight ? 'theme.light' : 'theme.dark');
+    }
+
+    function applyAriaTranslations() {
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria');
+            el.setAttribute('aria-label', t(key));
+        });
     }
 
     /* ----------------------------------------------------------
@@ -209,6 +271,8 @@
             // Allow inline HTML so <strong> tags in long copy survive
             el.innerHTML = value;
         });
+        applyAriaTranslations();
+        syncThemeButton();
         initDynamicGreeting();
     }
 
@@ -219,25 +283,23 @@
         const btn = document.getElementById('theme-toggle');
         if (!btn) return;
 
-        function syncButton() {
-            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-            btn.setAttribute('aria-pressed', String(!isDark));
-            btn.setAttribute('aria-label', t(isDark ? 'aria.theme.toLight' : 'aria.theme.toDark'));
-        }
-
-        syncButton();
+        applyTheme(document.documentElement.getAttribute('data-theme'));
+        syncThemeButton();
 
         btn.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+            const current = normalizeTheme(document.documentElement.getAttribute('data-theme'));
             const next = current === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
-            syncButton();
-            announce(t(next === 'light' ? 'announce.theme.light' : 'announce.theme.dark'));
+            applyTheme(next);
+            syncThemeButton();
+
+            let message = t(next === 'light' ? 'announce.theme.light' : 'announce.theme.dark');
+            if (isForcedColorsActive()) {
+                message += ' ' + t('announce.theme.forcedColors');
+            }
+            announce(message);
         });
 
-        // Re-sync after language changes
-        document.addEventListener('lang:changed', syncButton);
+        document.addEventListener('lang:changed', syncThemeButton);
     }
 
     /* ----------------------------------------------------------
@@ -280,6 +342,7 @@
 
         function setOpen(open) {
             btn.setAttribute('aria-expanded', String(open));
+            btn.setAttribute('data-i18n-aria', open ? 'aria.menu.close' : 'aria.menu.open');
             btn.setAttribute('aria-label', t(open ? 'aria.menu.close' : 'aria.menu.open'));
             nav.classList.toggle('is-open', open);
             document.body.classList.toggle('nav-open', open);

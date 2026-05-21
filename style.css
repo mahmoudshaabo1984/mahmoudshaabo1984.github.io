@@ -3,9 +3,24 @@
    Dark/light themes, EN/AR (LTR/RTL), reduced-motion safe.
    ============================================================= */
 
-/* ---------- Design tokens (dark theme, default) ---------- */
-:root,
-:root[data-theme="dark"] {
+/* ---------- Shared design tokens (non-color) ---------- */
+:root {
+    --font-en: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --font-ar: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    --font-base: var(--font-en);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-pill: 999px;
+
+    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Design tokens (dark theme) ---------- */
+:root[data-theme="dark"],
+html.theme-dark {
     --bg-main: #0d1117;
     --bg-section: #161b22;
     --bg-card: #21262d;
@@ -29,23 +44,12 @@
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
 
-    --font-en: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    --font-ar: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
-    --font-base: var(--font-en);
-
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-pill: 999px;
-
-    --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-
     color-scheme: dark;
 }
 
 /* ---------- Light theme overrides ---------- */
-:root[data-theme="light"] {
+:root[data-theme="light"],
+html.theme-light {
     --bg-main: #f6f8fa;
     --bg-section: #ffffff;
     --bg-card: #ffffff;
@@ -87,6 +91,49 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
     scroll-padding-top: 90px; /* offset for sticky header */
+    background-color: var(--bg-main, #0d1117);
+    color: var(--text-primary, #f0f6fc);
+}
+
+/* Explicit theme colors (fallback if CSS variables are blocked) */
+html[data-theme="light"],
+html.theme-light {
+    color-scheme: light;
+    background-color: #f6f8fa;
+    color: #1f2328;
+}
+
+html[data-theme="dark"],
+html.theme-dark {
+    color-scheme: dark;
+    background-color: #0d1117;
+    color: #f0f6fc;
+}
+
+html[data-theme="light"] body,
+html.theme-light body {
+    background-color: #f6f8fa;
+    color: #1f2328;
+}
+
+html[data-theme="dark"] body,
+html.theme-dark body {
+    background-color: #0d1117;
+    color: #f0f6fc;
+}
+
+html[data-theme="light"] .about-section,
+html[data-theme="light"] .projects-section,
+html.theme-light .about-section,
+html.theme-light .projects-section {
+    background-color: #ffffff;
+}
+
+html[data-theme="dark"] .about-section,
+html[data-theme="dark"] .projects-section,
+html.theme-dark .about-section,
+html.theme-dark .projects-section {
+    background-color: #161b22;
 }
 
 body {
@@ -156,6 +203,19 @@ button {
 
 .skip-link:focus {
     top: 0;
+}
+
+/* Forced-colors / High Contrast notice */
+.forced-colors-notice {
+    display: none;
+    margin: 0;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    background-color: var(--accent-soft);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* ---------- Container ---------- */
@@ -267,11 +327,34 @@ button {
     height: 20px;
 }
 
+/* Theme toggle button with visible label */
+.theme-toggle-btn {
+    width: auto;
+    min-width: 40px;
+    padding: 0 12px;
+    gap: 8px;
+    font-family: var(--font-en);
+}
+
+.theme-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-toggle-text {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
 /* Theme toggle icon swap */
 #theme-toggle .icon-moon { display: none; }
 #theme-toggle .icon-sun  { display: block; }
-:root[data-theme="light"] #theme-toggle .icon-moon { display: block; }
-:root[data-theme="light"] #theme-toggle .icon-sun  { display: none; }
+html[data-theme="light"] #theme-toggle .icon-moon,
+html.theme-light #theme-toggle .icon-moon { display: block; }
+html[data-theme="light"] #theme-toggle .icon-sun,
+html.theme-light #theme-toggle .icon-sun  { display: none; }
 
 /* Hamburger */
 .menu-toggle {
@@ -1077,6 +1160,57 @@ button {
 
 @media (max-width: 480px) {
     .hero-cta-group .btn { width: 100%; }
+    .theme-toggle-btn { padding: 0 10px; }
+}
+
+/* ============================================================= */
+/*                    FORCED COLORS / HIGH CONTRAST               */
+/* ============================================================= */
+
+@media (forced-colors: active) {
+    .forced-colors-notice {
+        display: block;
+        background: Canvas;
+        color: CanvasText;
+        border-bottom: 1px solid CanvasText;
+    }
+
+    html,
+    body,
+    .main-header,
+    .about-section,
+    .projects-section,
+    .skills-section,
+    .contact-section,
+    .main-footer,
+    .about-card,
+    .skill-card,
+    .project-card,
+    .contact-form,
+    .contact-aside {
+        background-color: Canvas !important;
+        color: CanvasText !important;
+        border-color: CanvasText !important;
+    }
+
+    .btn-primary,
+    .filter-chip.is-active,
+    .back-to-top {
+        background-color: Highlight !important;
+        color: HighlightText !important;
+        border-color: Highlight !important;
+    }
+
+    a,
+    .project-link,
+    .logo a:hover,
+    .main-nav a[aria-current="true"] {
+        color: LinkText !important;
+    }
+
+    *:focus-visible {
+        outline-color: Highlight !important;
+    }
 }
 
 /* ============================================================= */
