@@ -932,6 +932,42 @@ html.theme-light #theme-toggle .icon-sun  { display: none; }
     flex-shrink: 0;
 }
 
+.email-reveal-btn {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    position: relative;
+    width: 100%;
+    text-align: left;
+}
+
+.email-reveal-btn.revealed {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.email-copied-toast {
+    display: none;
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: fadeInUp 0.2s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 .contact-note {
     margin-top: 18px;
     color: var(--text-muted);

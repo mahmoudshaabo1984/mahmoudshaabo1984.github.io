@@ -596,6 +596,37 @@
     }
 
     /* ----------------------------------------------------------
+       Email reveal + copy
+       ---------------------------------------------------------- */
+    function initEmailReveal() {
+        const btn   = document.getElementById('email-reveal-btn');
+        const label = document.getElementById('email-reveal-text');
+        const toast = document.getElementById('email-copied-toast');
+        if (!btn) return;
+
+        const EMAIL = 'obscureman999@gmail.com';
+        let revealed = false;
+        let toastTimer = null;
+
+        btn.addEventListener('click', function () {
+            if (!revealed) {
+                label.textContent = EMAIL;
+                btn.classList.add('revealed');
+                btn.setAttribute('aria-label', 'Copy email address');
+                revealed = true;
+            }
+
+            navigator.clipboard.writeText(EMAIL).then(function () {
+                toast.style.display = 'block';
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function () {
+                    toast.style.display = 'none';
+                }, 2000);
+            });
+        });
+    }
+
+    /* ----------------------------------------------------------
        Bootstrap
        ---------------------------------------------------------- */
     function init() {
@@ -608,6 +639,7 @@
         initBackToTop();
         initProjectFilter();
         initContactForm();
+        initEmailReveal();
     }
 
     if (document.readyState === 'loading') {
